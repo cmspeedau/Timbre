@@ -1,0 +1,16 @@
+# Rust build artifacts
+/target/
+
+# Local environment and secrets
+.env
+.env.*
+
+# SQLite databases (WAL mode leaves sidecar files)
+*.db
+*.db-wal
+*.db-shm
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
