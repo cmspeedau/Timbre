@@ -79,11 +79,13 @@ No component may require a non-Rust runtime, interpreter, or web engine to funct
 Each task below is a checkbox. A stage is complete only when every checkbox in it is ticked and its exit gate is demonstrated; tick items as work lands so this file remains the source of truth for progress.
 
 Phase 0 — Project foundation
-- [ ] Establish the Cargo workspace, coding conventions, CI, and development environment.
-- [ ] Define shared API contracts and architectural decision records.
-- [ ] Create database migration and configuration conventions.
-- [ ] Define crate ownership and dependency rules.
-- [ ] Exit gate: All crates build, test, and communicate through agreed interfaces.
+- [x] Establish the Cargo workspace, coding conventions, CI, and development environment.
+- [x] Define shared API contracts and architectural decision records.
+- [x] Create database migration and configuration conventions.
+- [x] Define crate ownership and dependency rules.
+- [x] Exit gate: All crates build, test, and communicate through agreed interfaces.
+
+Evidence: `cargo build --workspace`, `cargo test --workspace`, `cargo clippy --workspace --all-targets --all-features -- -D warnings`, and `cargo fmt --all -- --check` pass; CI runs all four on every push. The shared interfaces are `timbre-shared-types` and `timbre-api-contracts`, exercised by the contract tests in `crates/testing/tests/contracts.rs`. Conventions and rules are recorded in CONTRIBUTING.md, `docs/adr/0001`–`0006`, `docs/api/`, `migrations/`, and CODEOWNERS.
 
 Phase 1 — Local-library MVP
 - [ ] Implement server health and library APIs.
