@@ -4,7 +4,7 @@ A self-hosted, Roon-inspired music platform: local library management, playback,
 
 **The name.** Timbre is the character that makes a sound what it is — what a listener recognizes beyond pitch and loudness. The project deliberately copies no proprietary implementation details, branding, or protocols.
 
-> **Status: planning.** There is no code yet. The roadmaps in this repository are the specification, and they are the project's source of truth.
+> **Status: foundation.** The Cargo workspace, the shared contracts, and CI exist — Phase 0 of the [Master Roadmap](Master%20Roadmap.md) is complete. There is no user-facing functionality yet. The roadmaps in this repository remain the specification, and they are the project's source of truth.
 
 ## Contents
 
@@ -16,6 +16,7 @@ A self-hosted, Roon-inspired music platform: local library management, playback,
 - [Subsystem roadmaps](#subsystem-roadmaps)
 - [Development](#development)
 - [Non-goals](#non-goals)
+- [License](#license)
 
 ## What this is
 
@@ -114,16 +115,24 @@ Development proceeds in stages. A stage is complete only when all its tasks are 
 
 ## Development
 
-Once the workspace exists, the standard commands apply:
+The toolchain is pinned in `rust-toolchain.toml`, and `rustup` uses it
+automatically. The standard commands are:
 
 ```sh
-cargo build              # build the workspace
-cargo test               # run unit and integration tests
-cargo clippy --all-targets -- -D warnings
-cargo fmt --all
+cargo fmt --all                                                              # format
+cargo clippy --workspace --all-targets --all-features -- -D warnings         # lint
+cargo test --workspace --all-features                                        # test
+cargo build --workspace                                                      # build
 ```
 
-The first milestone is Phase 0: create the Cargo workspace, define shared contracts, and set up CI. Until then, work happens in the roadmaps.
+CI runs these on every push and pull request. [CONTRIBUTING.md](CONTRIBUTING.md)
+covers coding conventions, branches, and commits; architectural decisions are
+recorded as ADRs in [docs/adr](docs/adr/), and the contract policy lives in
+[docs/api](docs/api/).
+
+The Phase 0 exit gate — all crates build, test, and communicate through agreed
+interfaces — is held in place by the contract tests in
+`crates/testing/tests/contracts.rs`.
 
 ## Non-goals
 
@@ -132,3 +141,12 @@ The first milestone is Phase 0: create the Cargo workspace, define shared contra
 - Depending on cloud services for basic local playback.
 - Building a distributed microservice architecture before it is necessary.
 - Depending on a non-Rust language, runtime, web engine, or interpreter for any component.
+
+## License
+
+Timbre is licensed under either of
+
+- [MIT](LICENSE-MIT)
+- [Apache License 2.0](LICENSE-APACHE)
+
+at your option. See [ADR-0006](docs/adr/0006-licensing.md).
