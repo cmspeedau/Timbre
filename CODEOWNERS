@@ -1,0 +1,28 @@
+# Ownership is defined by crate boundary; see docs/adr/0003-workspace-layout-and-dependency-rules.md.
+#
+# The repository has a single maintainer for now, identified by address. As the
+# project grows, replace the address with a GitHub team (for example
+# @timbre/server) so review requests route to the subsystem's owners.
+
+*                       cmspeedau@gmail.com
+
+# Shared contracts: changes here are reviewed by every consumer.
+/crates/shared-types/   cmspeedau@gmail.com
+/crates/api-contracts/  cmspeedau@gmail.com
+/docs/api/              cmspeedau@gmail.com
+
+# Subsystems.
+/crates/server/         cmspeedau@gmail.com
+/crates/library/        cmspeedau@gmail.com
+/crates/audio-engine/   cmspeedau@gmail.com
+/crates/devices/        cmspeedau@gmail.com
+/crates/discovery/      cmspeedau@gmail.com
+/crates/remote-access/  cmspeedau@gmail.com
+/crates/integrations/   cmspeedau@gmail.com
+/crates/ui/             cmspeedau@gmail.com
+/crates/testing/        cmspeedau@gmail.com
+/apps/                  cmspeedau@gmail.com
+
+# Deployment and packaging.
+/deploy/                cmspeedau@gmail.com
+/.github/               cmspeedau@gmail.com
