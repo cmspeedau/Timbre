@@ -1,0 +1,15 @@
+[package]
+name = "timbre-discovery"
+description = "Timbre discovery: metadata enrichment, search, relationships, and recommendations."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+timbre-shared-types.workspace = true
+
+[lints]
+workspace = true

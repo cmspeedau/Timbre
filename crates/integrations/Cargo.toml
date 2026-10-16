@@ -1,0 +1,15 @@
+[package]
+name = "timbre-integrations"
+description = "Timbre integrations: streaming providers and external protocol adapters."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+timbre-shared-types.workspace = true
+
+[lints]
+workspace = true

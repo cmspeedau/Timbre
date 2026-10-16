@@ -1,0 +1,28 @@
+[package]
+name = "timbre-testing"
+description = "Cross-system test support and contract, integration, and audio validation tests for Timbre."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+timbre-api-contracts.workspace = true
+timbre-shared-types.workspace = true
+
+[dev-dependencies]
+timbre-audio-engine.workspace = true
+timbre-devices.workspace = true
+timbre-discovery.workspace = true
+timbre-integrations.workspace = true
+timbre-library.workspace = true
+timbre-remote-access.workspace = true
+timbre-server.workspace = true
+timbre-ui.workspace = true
+
+[lints]
+workspace = true

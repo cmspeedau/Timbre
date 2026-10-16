@@ -1,0 +1,3 @@
+# Minimum supported Rust version, kept in step with `rust-version` in the
+# workspace Cargo.toml and the channel in rust-toolchain.toml.
+msrv = "1.85"

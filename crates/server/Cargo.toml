@@ -1,0 +1,16 @@
+[package]
+name = "timbre-server"
+description = "The Timbre application server: API, configuration, orchestration, and authentication."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+timbre-api-contracts.workspace = true
+timbre-shared-types.workspace = true
+
+[lints]
+workspace = true

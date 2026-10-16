@@ -1,0 +1,16 @@
+[package]
+name = "timbre-ui"
+description = "Timbre shared client UI components for the desktop and mobile apps."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+timbre-api-contracts.workspace = true
+timbre-shared-types.workspace = true
+
+[lints]
+workspace = true

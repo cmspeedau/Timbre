@@ -1,0 +1,15 @@
+[package]
+name = "timbre-audio-engine"
+description = "The Timbre audio engine: decoding, processing, rendering, and the signal path."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+timbre-shared-types.workspace = true
+
+[lints]
+workspace = true
