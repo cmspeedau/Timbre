@@ -8,9 +8,23 @@ license.workspace = true
 authors.workspace = true
 publish.workspace = true
 
+[features]
+default = []
+hardware-audio = ["timbre-audio-engine/cpal"]
+
 [dependencies]
 timbre-api-contracts.workspace = true
+timbre-db.workspace = true
+rusqlite.workspace = true
 timbre-shared-types.workspace = true
+timbre-library.workspace = true
+timbre-audio-engine.workspace = true
+axum.workspace = true
+tokio.workspace = true
+serde.workspace = true
+uuid.workspace = true
+futures-util.workspace = true
+serde_json.workspace = true
 
 [lints]
 workspace = true

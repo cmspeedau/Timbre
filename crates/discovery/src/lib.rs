@@ -1,8 +1,4 @@
-//! Discovery: metadata enrichment, search, relationships, and recommendations.
-//!
-//! Phase 0 skeleton. Enrichment and search land with the
-//! [Discovery Roadmap](../../Discovery%20Roadmap.md). Enrichment must never
-//! block local playback.
+//! Metadata enrichment, search, relationships, and recommendations.
 
 use timbre_shared_types::Subsystem;
 

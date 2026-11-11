@@ -39,6 +39,7 @@ chunks decoded after the change, not samples already queued by an output sink.
 playback. Decoder frame-count metadata supplies an optional duration and rejects
 seeks beyond known track length.
 
+
 With the optional CPAL feature, `CpalAudioSink` converts interleaved `i16` PCM
 to the default output device format before enqueueing it. `adapt_pcm` provides
 linear sample-rate conversion and basic mono/stereo/multichannel remixing. The adapter rejects partial interleaved frames. The

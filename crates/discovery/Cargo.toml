@@ -1,6 +1,5 @@
 [package]
 name = "timbre-discovery"
-description = "Timbre discovery: metadata enrichment, search, relationships, and recommendations."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true

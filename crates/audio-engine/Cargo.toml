@@ -1,6 +1,6 @@
 [package]
 name = "timbre-audio-engine"
-description = "The Timbre audio engine: decoding, processing, rendering, and the signal path."
+description = "Streaming audio decoding, buffering, and playback control for Timbre."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -10,6 +10,16 @@ publish.workspace = true
 
 [dependencies]
 timbre-shared-types.workspace = true
+thiserror.workspace = true
+symphonia.workspace = true
 
 [lints]
 workspace = true
+
+[features]
+default = []
+cpal = ["dep:cpal"]
+
+[dependencies.cpal]
+version = "0.15"
+optional = true

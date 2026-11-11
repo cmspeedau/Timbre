@@ -1,6 +1,5 @@
 [package]
 name = "timbre-devices"
-description = "Timbre output devices: discovery, zones, endpoints, and synchronization."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true

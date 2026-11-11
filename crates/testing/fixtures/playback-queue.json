@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "recording_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+    },
+    {
+      "id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "recording_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+    }
+  ],
+  "revision": 7,
+  "current_cursor": null
+}

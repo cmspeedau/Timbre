@@ -10,6 +10,9 @@ publish.workspace = true
 
 [dependencies]
 timbre-shared-types.workspace = true
+lofty.workspace = true
+symphonia.workspace = true
+walkdir.workspace = true
 
 [lints]
 workspace = true

@@ -1,6 +1,5 @@
 [package]
 name = "timbre-integrations"
-description = "Timbre integrations: streaming providers and external protocol adapters."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
