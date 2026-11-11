@@ -19,27 +19,27 @@ reports/ — reproducible test outputs and release evidence.
 Tooling: cargo test, criterion for benchmarks, proptest for property tests, insta for snapshots, wiremock for HTTP mocks, and hound for audio fixtures.
 3. Implementation phases
 Phase 0 — Testing foundation
-- [ ] Establish CI test stages.
+- [x] Establish workspace-level Rust build, test, formatting, and strict Clippy checks in CI.
 - [ ] Define fixture licensing and redistribution rules.
-- [ ] Create a small representative audio test corpus.
-- [ ] Add deterministic test configuration.
-- [ ] Standardize test naming and reporting.
+- [x] Add small generated WAV fixtures plus JSON contract fixtures.
+- [x] Keep core tests deterministic and hardware independent through injected memory sinks and in-memory SQLite.
+- [x] Add focused crate tests and offline milestone/web verification scripts.
 - [ ] Exit gate: CI stages, fixtures, and deterministic test configuration are established.
 Phase 1 — Core correctness
-- [ ] Test database migrations.
-- [ ] Test library scanning and metadata extraction.
-- [ ] Test API contracts.
-- [ ] Test queue persistence and state transitions.
-- [ ] Test supported decoder behavior.
-- [ ] Automate scan-to-play end-to-end tests.
+- [x] Test SQLite playback migrations and state persistence.
+- [x] Test library scanning, metadata parsing, malformed-file isolation, and fallbacks.
+- [x] Test API contract round trips and playback handlers.
+- [x] Test queue persistence, playback modes, volume, and state transitions.
+- [x] Test WAV decoder behavior, seek boundaries, and PCM output with a memory sink.
+- [ ] Automate the complete configured-root scan → browse → audible-play end-to-end journey.
 - [ ] Exit gate: Scan-to-play end-to-end tests and core correctness tests run automatically.
 Phase 2 — Audio quality
-- [ ] Add reference PCM files and hashes.
-- [ ] Validate decoding and sample-rate conversion.
-- [ ] Test channel mapping and DSP behavior.
-- [ ] Measure latency and buffer underruns.
+- [ ] Add licensed reference PCM files and stable hashes.
+- [x] Test WAV decoding and PCM sample-rate/channel adaptation numerically.
+- [x] Test channel mapping and equalizer DSP behavior.
+- [x] Test sink buffer counters/underrun behavior through deterministic sinks; hardware latency remains unmeasured.
 - [ ] Test long playback sessions and track transitions.
-- [ ] Separate deterministic numerical tests from hardware listening tests.
+- [x] Separate hardware-independent numerical tests from unverified hardware smoke tests.
 - [ ] Exit gate: Decoding, conversion, channel mapping, and DSP have reference fixtures and numerical checks.
 Phase 3 — Scale and resilience
 - [ ] Generate large synthetic libraries.

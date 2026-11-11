@@ -24,28 +24,29 @@ Stack: lofty for tags and technical properties, walkdir for traversal, blake3 fo
 
 3. Implementation phases
 Phase 0 — Data model
-- [ ] Define media-file, track, release, artist, and credit models.
-- [ ] Define library locations and scan jobs.
-- [ ] Define artwork references and cache metadata.
+- [x] Define initial artist, album, recording, and scanned-track models at the library/server boundary.
+- [x] Define in-memory configured library roots and scan-job results.
+- [ ] Define durable media-file/catalog schemas, artwork references, provenance, and user overrides.
 - [ ] Separate source tags, matched metadata, and user overrides.
-- [ ] Add schema migrations and indexes.
+- [ ] Add library schema migrations and indexes (the current SQLite migrations persist playback state, not the catalog).
 - [ ] Exit gate: The catalog schema, migrations, and indexes exist and separate files, recordings, and user overrides.
 Phase 1 — File scanning
-- [ ] Scan configured directories recursively.
-- [ ] Support supported audio formats through pluggable extractors.
-- [ ] Extract tags, duration, channel count, sample rate, and bit depth where available.
-- [ ] Record file size, modification time, and a stable file reference.
-- [ ] Detect malformed files without aborting the scan.
-- [ ] Track added, changed, moved, and missing files.
-- [ ] Report progress and support cancellation.
+- [x] Recursively scan explicitly configured and canonicalized roots.
+- [x] Support extension-filtered audio discovery with Lofty metadata extraction and WAV property fallback.
+- [x] Extract title/artist/album/track and available duration, channel count, sample rate, and bit depth.
+- [x] Keep file paths and metadata in scan results and the current in-memory catalog.
+- [x] Isolate malformed-file errors so other files continue scanning.
+- [ ] Track changed, moved, and missing files durably across repeat scans.
+- [ ] Persist roots, catalog, and scan jobs across restarts.
+- [ ] Report incremental progress and support cancellation.
 - [ ] Exit gate: A configured folder scans without manual database setup and reports progress and cancellation.
 Phase 2 — Catalog normalization
-- [ ] Normalize album and artist relationships.
+- [x] Create initial artist and album relationships from extracted tags and stable in-memory recording IDs.
+- [x] Handle missing titles/artists with filename and “Unknown Artist” fallbacks.
 - [ ] Support multi-disc albums and compilations.
-- [ ] Preserve original tag values.
-- [ ] Handle missing, conflicting, and incomplete metadata.
+- [ ] Preserve original tag values separately from normalized/user-edited values.
 - [ ] Detect likely duplicates using identifiers and file fingerprints.
-- [ ] Avoid destructive automatic file operations.
+- [x] Keep scanning non-destructive; no source files are modified or removed.
 - [ ] Exit gate: Repeated scans are idempotent and produce normalized, non-destructive catalog records.
 Phase 3 — Artwork and enrichment
 - [ ] Extract embedded artwork.

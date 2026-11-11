@@ -88,21 +88,23 @@ Phase 0 — Project foundation
 Evidence: `cargo build --workspace`, `cargo test --workspace`, `cargo clippy --workspace --all-targets --all-features -- -D warnings`, and `cargo fmt --all -- --check` pass; CI runs all four on every push. The shared interfaces are `timbre-shared-types` and `timbre-api-contracts`, exercised by the contract tests in `crates/testing/tests/contracts.rs`. Conventions and rules are recorded in CONTRIBUTING.md, `docs/adr/0001`–`0006`, `docs/api/`, `migrations/`, and CODEOWNERS.
 
 Phase 1 — Local-library MVP
-- [ ] Implement server health and library APIs.
-- [ ] Scan local music folders and persist metadata.
-- [ ] Build browsing, search, and queue interfaces.
-- [ ] Play supported files through one local audio output.
-- [ ] Add playlists, favorites, and persistent playback state.
+- [x] Implement initial server health and library-root, scan, browse, and detail APIs.
+- [ ] Persist scanned library metadata and catalog records across restarts.
+- [x] Build initial library browsing and playback-queue interfaces; search is currently client-side filtering only.
+- [ ] Demonstrate supported-file playback through a working local hardware output end to end.
+- [ ] Add playlists and favorites; persistent queue, playback modes, volume, and EQ settings are implemented, but this does not complete the broader persistence requirement.
 - [ ] Exit gate: A user can index a folder, browse albums, and play an album reliably.
 
 Phase 2 — Metadata, audio quality, and bit-perfect output
 - [ ] Add metadata matching and relationship navigation.
-- [ ] Implement signal-path reporting.
-- [ ] Add basic DSP and output capability negotiation.
+- [ ] Implement signal-path reporting from the active engine pipeline.
+- [x] Add initial parametric EQ/DSP, output-device enumeration, and basic output-format adaptation.
 - [ ] Implement bit-perfect exclusive output per operating system: WASAPI exclusive (Windows), ALSA hw (Linux), and CoreAudio hog mode (macOS).
-- [ ] Add explicit sample-rate conversion and channel mapping where the exclusive path requires it.
-- [ ] Improve error reporting and library recovery.
+- [ ] Validate explicit sample-rate conversion and channel mapping on supported hardware paths.
+- [ ] Improve error reporting and library recovery beyond the initial API/parser errors.
 - [ ] Exit gate: Metadata edits are reliable, audio behavior is observable and testable, and bit-perfect output is demonstrated on each supported operating system.
+
+Implementation evidence (2026-11-11): The merged integration adds a Lofty/WalkDir library scanner and metadata parser, SQLite playback-queue/state persistence, versioned library and playback routes, an embedded browser-based listening UI, a Symphonia playback engine, optional CPAL output, PCM adaptation, EQ, and playback metrics. Workspace tests, strict Clippy, formatting, milestone 3–7 verifiers, and web verification passed. Scanned library catalog/root/job state remains in memory rather than SQLite; the scan-to-browse-to-audible-play journey has not been demonstrated, and native exclusive-mode output, metadata matching, and signal-path reporting are not implemented. Therefore neither Phase 1 nor Phase 2 exit gate is complete.
 
 Phase 3 — Multiple outputs and discovery
 - [ ] Add device discovery and named zones.

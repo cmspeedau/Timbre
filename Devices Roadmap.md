@@ -28,12 +28,15 @@ Phase 0 — Device model
 - [ ] Define error and reconnect behavior.
 - [ ] Exit gate: Device, capability, zone, and session schemas are defined with lifecycle and reconnect behavior.
 Phase 1 — Local output
-- [ ] Enumerate local audio devices.
-- [ ] Expose supported sample rates, channels, and formats.
-- [ ] Allow selecting a default output.
-- [ ] Detect disconnection and reconnection.
-- [ ] Display device status in the client.
+- [x] Add initial local-output enumeration through the audio-engine CPAL adapter (with a memory/headless fallback).
+- [x] Expose the available sample rates and channel counts reported by the adapter.
+- [x] Add persisted output selection and a playback API selection route.
+- [ ] Verify that runtime selection replaces the active sink and continues playback on the requested device.
+- [ ] Detect disconnection and reconnection and recover active sessions.
+- [ ] Display device status and selection failures in the client.
 - [ ] Exit gate: Local outputs are enumerated, selectable, and recover from disconnection.
+
+Implementation note (2026-11-11): Initial enumeration and persisted selection are bridged through `crates/audio-engine` and the playback API; `crates/devices` remains a placeholder. Hardware enumeration, sink switching, disconnect/reconnect recovery, and cross-platform capability accuracy are not yet demonstrated.
 Phase 2 — Independent zones
 - [ ] Create named zones.
 - [ ] Bind zones to supported output endpoints.

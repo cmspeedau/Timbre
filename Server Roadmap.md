@@ -29,29 +29,32 @@ Stack: axum, tokio, tower, tower-http, serde, sqlx, tracing.
 
 3. Implementation phases
 Phase 0 — Server foundation
-- [ ] Create the server entry point and configuration loader.
+- [ ] Create a production server entry point and configuration loader (router/state are currently library APIs; a binary/config lifecycle is not yet present).
 - [ ] Add structured logging and request IDs.
-- [ ] Add health and readiness endpoints.
-- [ ] Set up database connectivity and migrations.
+- [x] Add a basic health endpoint.
+- [x] Set up SQLite queue-state/device/EQ persistence and migrations.
 - [ ] Implement graceful shutdown.
-- [ ] Add environment-specific configuration validation.
+- [ ] Add environment-specific configuration validation and a readiness endpoint.
 - [ ] Exit gate: The server starts from documented configuration, exposes health and readiness, and shuts down gracefully.
 Phase 1 — Core APIs
-- [ ] Define API versioning and error conventions.
-- [ ] Implement library browsing endpoints.
-- [ ] Implement search endpoints.
-- [ ] Implement playback transport and queue endpoints.
+- [x] Define initial versioned `/api/v1` routes and a shared error envelope.
+- [x] Implement library-root, scan submission, job-result, artist/album/track browse and detail endpoints.
+- [ ] Implement a server-side search endpoint (the web UI currently filters its loaded tracks locally).
+- [x] Implement playback transport, queue, seek, volume, repeat/shuffle, device-selection, EQ, metrics, state, and SSE event routes.
 - [ ] Implement playlist and favorite endpoints.
-- [ ] Add pagination, filtering, and sorting.
+- [x] Add offset/limit pagination and basic filters/sorting for library browse endpoints.
 - [ ] Generate or publish a machine-readable API specification.
 - [ ] Exit gate: The documented core APIs are implemented, versioned, and covered by contract tests.
 Phase 2 — Realtime and jobs
-- [ ] Publish playback-state events over WebSocket.
-- [ ] Publish library scan progress.
-- [ ] Add job status, cancellation, and retry policies.
-- [ ] Handle client reconnects and stale subscriptions.
-- [ ] Keep event payloads versioned and minimal.
+- [x] Publish playback state and queue updates over Server-Sent Events.
+- [ ] Publish incremental library scan progress.
+- [x] Add asynchronous scan submission and job-result lookup.
+- [ ] Add job cancellation and retry policies.
+- [x] Support reconnect by allowing clients to fetch current playback state and refresh after SSE reconnection.
+- [x] Keep event payloads typed and sequenced for playback updates.
 - [ ] Exit gate: Realtime events and background jobs report status and recover after client reconnection.
+
+Implementation evidence (2026-11-11): Backend unit/workspace tests, strict Clippy, formatting, milestone and web verifiers pass. Limitations remain: scan roots/catalog/jobs are in memory, only playback state is persisted; no production binary/configuration, auth, playlists/favorites, server search, OpenAPI document, scan progress/cancellation, or graceful shutdown is included.
 Phase 3 — Security and resilience
 - [ ] Add user and client authentication.
 - [ ] Implement authorization for sensitive operations.

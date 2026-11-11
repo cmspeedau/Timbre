@@ -24,46 +24,45 @@ Bit-perfect, exclusive output is a first-class requirement. cpal provides device
 
 3. Implementation phases
 Phase 0 — Audio prototype
-- [ ] Select supported operating systems and initial codecs.
-- [ ] Compare candidate media frameworks.
-- [ ] Build a command-line playback prototype.
-- [ ] Measure latency, CPU use, and buffering behavior.
-- [ ] Define decoder and output interfaces.
+- [x] Select initial implementation dependencies: Symphonia decoding, optional CPAL output, and a deterministic memory sink.
+- [ ] Finalize supported operating systems and initial codecs as a documented support matrix.
+- [ ] Build a standalone command-line playback prototype.
+- [ ] Measure latency and CPU use on supported hardware.
+- [x] Define decoder, sink, PCM, and playback lifecycle interfaces.
 - [ ] Exit gate: A prototype decodes and renders to one output with measured latency, CPU, and buffering.
 Phase 1 — Reliable playback
-- [ ] Implement file-backed playback.
-- [ ] Add play, pause, seek, stop, and end-of-track handling.
-- [ ] Support cancellation and safe resource cleanup.
-- [ ] Handle decoder and output-device errors.
-- [ ] Prevent underruns under expected workloads.
-- [ ] Keep audio processing off UI and API request threads.
+- [x] Implement file-backed decoding and pump-driven playback.
+- [x] Add play, pause, seek, stop, and end-of-track state handling.
+- [x] Add decoder and sink error reporting plus test-fixture cleanup.
+- [ ] Support cancellation and safe resource cleanup for a long-running playback worker.
+- [ ] Prevent underruns under expected hardware workloads.
+- [x] Keep decode/pump work out of interactive API request handlers; server pump scheduling and actual output still require end-to-end validation.
 - [ ] Exit gate: Supported files play reliably from start to finish with correct lifecycle and error handling.
 Phase 2 — Format and output management
-- [ ] Implement source-format inspection.
-- [ ] Negotiate output capabilities.
+- [x] Inspect source format and enumerate local output capabilities when CPAL is enabled.
+- [x] Add basic output adaptation, channel mapping, sample-rate conversion, volume, and mute handling.
 - [ ] Implement bit-perfect exclusive output per operating system: WASAPI exclusive, ALSA hw, and CoreAudio hog mode.
-- [ ] Add channel mapping.
-- [ ] Add explicit sample-rate conversion where required.
-- [ ] Add volume and mute handling.
-- [ ] Distinguish source format from rendered output format.
+- [ ] Report and validate source format separately from rendered output format across hardware backends.
 - [ ] Exit gate: Source and rendered formats are reported accurately and bit-perfect exclusive output works on each supported OS.
 Phase 3 — DSP
-- [ ] Implement a configurable processing graph.
-- [ ] Add headroom and clipping protection.
+- [ ] Implement a general configurable processing graph and processing bypass.
+- [ ] Add headroom and clipping protection across combined DSP and gain stages.
 - [ ] Add loudness normalization.
-- [ ] Add parametric equalization.
+- [x] Add initial configurable parametric equalization with per-channel filter state.
 - [ ] Add convolution-based correction.
-- [ ] Add processing bypass and per-zone settings.
-- [ ] Document processing order and numerical behavior.
+- [ ] Add per-zone settings.
+- [x] Document current EQ processing order and numerical constraints in code/API docs.
 - [ ] Exit gate: The DSP graph is configurable, deterministic, and documented, with bypass and headroom protection.
 Phase 4 — Quality and optimization
 - [ ] Add gapless playback where supported by the pipeline.
 - [ ] Evaluate bit-perfect output on compatible paths.
-- [ ] Add dropout and underrun diagnostics.
-- [ ] Test format changes between tracks.
+- [x] Add initial sink-buffer occupancy and underrun metrics.
+- [ ] Test format changes between tracks and device loss/recovery.
 - [ ] Optimize memory allocation and buffer management.
-- [ ] Add long-duration playback tests.
+- [ ] Add long-duration playback tests and measured hardware performance.
 - [ ] Exit gate: Playback is gapless where supported, diagnostics distinguish decode from output failures, and long sessions are stable.
+
+Implementation evidence (2026-11-11): Workspace tests, strict Clippy, formatting, and offline milestone/web verifiers pass. Added decoder, memory/CPAL sinks, PCM adapter, volume/mute, parametric EQ, and sink metrics. Hardware output, supported-format matrix, standalone prototype, per-OS exclusive paths, long-duration stability, and measured latency/CPU remain unverified or unimplemented; phase exit gates remain open.
 4. Task checklist
 - [ ] Decoding and rendering have explicit lifecycle management.
 - [ ] Audio processing does not depend on UI frame rate.
